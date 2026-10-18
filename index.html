@@ -1,19 +1,25 @@
 <!doctype html>
 <html lang="en">
+
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon"
+    href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🛍️</text></svg>">
   <title>Holiday Decider</title>
   <link rel="stylesheet" href="styles.css">
 </head>
+
 <body>
   <main class="app">
     <div class="wrap">
       <header class="hero">
         <p class="eyebrow">A tiny holiday shopping helper ✈</p>
         <h1>Holiday Decider <span aria-hidden="true">🛍️</span></h1>
-        <p class="subtitle">For the “it's cute, but do I really need it?” moments. Let your budget rules do the thinking — and leave a little room for holiday magic.</p>
-        <div class="trip-stamps"><span class="stamp">📍 Hong Kong edition</span><span class="stamp">💗 Spend with intention</span><span class="stamp">✨ No buyer's remorse, please</span></div>
+        <p class="subtitle">For the “it's cute, but do I really need it?” moments. Let your budget rules do the thinking
+          — and leave a little room for holiday magic.</p>
+        <div class="trip-stamps"><span class="stamp">📍 Hong Kong edition</span><span class="stamp">💗 Spend with
+            intention</span><span class="stamp">✨ No buyer's remorse, please</span></div>
       </header>
       <div class="layout">
         <section class="card" aria-labelledby="price-title">
@@ -21,19 +27,35 @@
           <p class="help">Pop in the price tag and get your personal shopping verdict.</p>
           <label class="label" for="price">How much is it?</label>
           <div class="price-row">
-            <input id="price" type="number" min="0" step="0.01" placeholder="e.g. 68" inputmode="decimal" aria-describedby="conversion-note">
-            <select id="currency" aria-label="Price currency"><option value="HKD">HKD · HK$</option><option value="SGD">SGD · S$</option></select>
+            <input id="price" type="number" min="0" step="0.01" placeholder="e.g. 68" inputmode="decimal"
+              aria-describedby="conversion-note">
+            <select id="currency" aria-label="Price currency">
+              <option value="HKD">HKD · HK$</option>
+              <option value="SGD">SGD · S$</option>
+            </select>
           </div>
-          <p class="converted" id="conversion-note">Approx. HK$6 = S$1. Rates are for quick decisions, not exact conversion.</p>
+          <p class="converted" id="conversion-note">Approx. HK$6 = S$1. Rates are for quick decisions, not exact
+            conversion.</p>
           <div class="verdict" id="verdict" aria-live="polite">
-            <div class="verdict-top"><div class="emoji" id="verdict-emoji">🛍️</div><div><h3 id="verdict-title">Ready when you are!</h3><p id="verdict-description">Enter a price above and I'll help you decide.</p></div></div>
+            <div class="verdict-top">
+              <div class="emoji" id="verdict-emoji">🛍️</div>
+              <div>
+                <h3 id="verdict-title">Ready when you are!</h3>
+                <p id="verdict-description">Enter a price above and I'll help you decide.</p>
+              </div>
+            </div>
             <p class="rule-note" id="rule-note">Your holiday rules, no judgement. 💕</p>
           </div>
-          <div class="suggestion" id="coin-suggestion"><strong>🎲 Feeling indecisive?</strong><span id="suggestion-text"></span><button class="btn btn-primary" id="suggest-flip" style="margin-top:10px">Flip a coin for me</button></div>
-          <p class="small" style="margin:14px 0 0">Tiny reminder: randomness can help break a tie, but it doesn't overrule your budget.</p>
+          <div class="suggestion" id="coin-suggestion"><strong>🎲 Feeling indecisive?</strong><span
+              id="suggestion-text"></span><button class="btn btn-primary" id="suggest-flip" style="margin-top:10px">Flip
+              a coin for me</button></div>
+          <p class="small" style="margin:14px 0 0">Tiny reminder: randomness can help break a tie, but it doesn't
+            overrule your budget.</p>
         </section>
         <section class="card" aria-label="Decision helpers">
-          <div class="tool-title"><h2>🪙 Flip a coin</h2><span class="tiny-tag">ALWAYS AVAILABLE</span></div>
+          <div class="tool-title">
+            <h2>🪙 Flip a coin</h2><span class="tiny-tag">ALWAYS AVAILABLE</span>
+          </div>
           <p class="help">Heads = get it. Tails = leave it. The coin has spoken. 😂</p>
           <div class="coin-area">
             <div class="coin" id="coin" aria-label="Coin ready">?</div>
@@ -42,15 +64,23 @@
             <p class="small" style="margin:10px 0 0">A fair 50/50 flip. Use it whenever you want, at any price.</p>
           </div>
           <div class="section-divider"></div>
-          <div class="tool-title"><h2>🎰 Random number</h2><span class="tiny-tag">YOUR RULES</span></div>
+          <div class="tool-title">
+            <h2>🎰 Random number</h2><span class="tiny-tag">YOUR RULES</span>
+          </div>
           <p class="help">Pick a range, generate a number, and let your own rule decide.</p>
           <div class="number-fields">
-            <div><label class="label" for="minimum">From</label><input id="minimum" type="number" value="1" step="1"></div>
-            <div><label class="label" for="maximum">To</label><input id="maximum" type="number" value="10" step="1"></div>
+            <div><label class="label" for="minimum">From</label><input id="minimum" type="number" value="1" step="1">
+            </div>
+            <div><label class="label" for="maximum">To</label><input id="maximum" type="number" value="10" step="1">
+            </div>
           </div>
           <button class="btn btn-secondary" id="number-button">Pick a random number 🎲</button>
-          <div class="number-result" aria-live="polite"><div><strong id="number-value">?</strong><span id="number-caption">Your lucky number will appear here</span></div></div>
-          <p class="small">Example: 1–5 = leave it, 6–10 = buy it. You set the meaning; the number just adds a little chaos.</p>
+          <div class="number-result" aria-live="polite">
+            <div><strong id="number-value">?</strong><span id="number-caption">Your lucky number will appear here</span>
+            </div>
+          </div>
+          <p class="small">Example: 1–5 = leave it, 6–10 = buy it. You set the meaning; the number just adds a little
+            chaos.</p>
         </section>
       </div>
       <footer class="footer">Made for holiday-you, with <strong>♡</strong> and a little self-control.</footer>
@@ -58,4 +88,5 @@
   </main>
   <script src="script.js" defer></script>
 </body>
+
 </html>
