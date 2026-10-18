@@ -1,6 +1,6 @@
 (() => {
   const priceInput = document.getElementById('price');
-  const currencyInput = document.getElementById('currency');
+  const currencyDropdown = document.getElementById('currencyDropdown');
   const verdictEmoji = document.getElementById('verdict-emoji');
   const verdictTitle = document.getElementById('verdict-title');
   const verdictDescription = document.getElementById('verdict-description');
@@ -11,6 +11,8 @@
   const coinResult = document.getElementById('coin-result');
   const flipButton = document.getElementById('flip-button');
   const suggestFlip = document.getElementById('suggest-flip');
+  const conversionNote = document.getElementById('conversion-note');
+  const tripStamp = document.getElementById('trip-stamp');
   let flipping = false;
 
   const tiers = [
@@ -23,21 +25,32 @@
     { max: Infinity, emoji: '🚨', title: 'Special case only!', description: 'Its WAYYY too Expensive! Only get it if it\'s truly special.', note: 'S$50+ Special case only', recommend: true }
   ];
 
-
   const holidayConfig = {
+    locationName: 'Hong Kong',
     currencyCode: 'HKD',
     currencySymbol: 'HK$',
     exchangeRate: 6 // Foreign currency per S$1
   };
-  
-  const foreignOption = Array.from(currencyInput.options)
-    .find(option => option.value !== 'SGD');
 
-  if (foreignOption) {
-    foreignOption.value = holidayConfig.currencyCode;
-    foreignOption.textContent =
-      `${holidayConfig.currencyCode} (${holidayConfig.currencySymbol})`;
-  }
+  // Update conversion note and trip stamp
+  conversionNote.textContent = `Approx. ${holidayConfig.currencySymbol}${holidayConfig.exchangeRate} = S$1. Rates are for quick decisions, not exact conversion.`;
+  tripStamp.textContent = `📍 ${holidayConfig.currencyCode} edition`;
+
+  // Populate currency dropdown
+  const currencies = [
+    { value: 'SGD', label: 'SGD (S$)' },
+    {
+      value: holidayConfig.currencyCode,
+      label: `${holidayConfig.currencyCode} (${holidayConfig.currencySymbol})`
+    }
+  ];
+
+  currencies.forEach(currency => {
+    const option = document.createElement('option');
+    option.value = currency.value;
+    option.textContent = currency.label;
+    currencyDropdown.appendChild(option);
+  });
 
   function formatMoney(value, currency) {
     return (currency === 'SGD' ? 'S$' : holidayConfig.currencySymbol) + value.toLocaleString('en-SG', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
@@ -53,8 +66,8 @@
       return;
     }
     const amount = Number(raw);
-    const sgd = currencyInput.value === 'SGD' ? amount : amount / holidayConfig.exchangeRate;
-    const holidayAmount = currencyInput.value === holidayConfig.currencyCode ? amount : amount * holidayConfig.exchangeRate;
+    const sgd = currencyDropdown.value === 'SGD' ? amount : amount / holidayConfig.exchangeRate;
+    const holidayAmount = currencyDropdown.value === holidayConfig.currencyCode ? amount : amount * holidayConfig.exchangeRate;
     const tier = tiers.find(item => sgd < item.max) || tiers[tiers.length - 1];
     verdictEmoji.textContent = tier.emoji;
     verdictTitle.textContent = tier.title;
@@ -70,7 +83,7 @@
     }
   }
   priceInput.addEventListener('input', updateVerdict);
-  currencyInput.addEventListener('change', updateVerdict);
+  currencyDropdown.addEventListener('change', updateVerdict);
 
   function flipCoin() {
     if (flipping) return;
