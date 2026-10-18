@@ -41,7 +41,8 @@
     { value: 'SGD', label: 'SGD (S$)' },
     {
       value: holidayConfig.currencyCode,
-      label: `${holidayConfig.currencyCode} (${holidayConfig.currencySymbol})`
+      label: `${holidayConfig.currencyCode} (${holidayConfig.currencySymbol})`,
+      selected: true
     }
   ];
 
@@ -49,8 +50,10 @@
     const option = document.createElement('option');
     option.value = currency.value;
     option.textContent = currency.label;
+    option.selected = currency.selected || false;
+
     currencyDropdown.appendChild(option);
-  });
+});
 
   function formatMoney(value, currency) {
     return (currency === 'SGD' ? 'S$' : holidayConfig.currencySymbol) + value.toLocaleString('en-SG', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
